@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - "80:80"
+
+  api:
+    restart: always
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./api:/app
+
+  client:
+    stdin_open: true
+    restart: always
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    command: npm start
+    volumes:
+      - /app/node_modules
+      - ./client:/app
