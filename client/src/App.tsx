@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import axios from "axios";
+import menuAxios from "./config/menuAxios";
 
 function App() {
   useEffect(() => {
     const fetch = async () => {
-      const res = await axios.get("/api/menu");
+      const res = await menuAxios.get("/auth/secret");
 
       console.log(res.data);
     };
