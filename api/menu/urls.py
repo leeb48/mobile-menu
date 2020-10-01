@@ -1,8 +1,8 @@
 from django.urls import path
 from .views import (
-    test
+    create_category_view
 )
 
 urlpatterns = [
-    path('', test)
+    path('create-category', create_category_view)
 ]
