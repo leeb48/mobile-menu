@@ -12,7 +12,8 @@ class FoodCategory(models.Model):
 class FoodItem(models.Model):
     name = models.CharField(max_length=60)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    # TODO: implement image storage feature
+    image = models.ImageField(upload_to='food_images',
+                              default='food_images/default.jpg')
     description = models.TextField()
     category = models.ManyToManyField("FoodCategory")
 
