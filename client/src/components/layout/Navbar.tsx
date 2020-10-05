@@ -1,4 +1,9 @@
 import React, { Fragment, useState } from "react";
+
+// Router Imports
+import { Link } from "react-router-dom";
+
+// Material UI Imports
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,16 +19,16 @@ import { ReactComponent as SoupSVG } from "../../img/soups.svg";
 import { ReactComponent as SaladSVG } from "../../img/salad.svg";
 import { ReactComponent as DrinkSVG } from "../../img/Drinks.svg";
 import { ReactComponent as SodaSVG } from "../../img/soda.svg";
+import { ReactComponent as BeerSVG } from "../../img/beer.svg";
+import { ReactComponent as SakeSVG } from "../../img/sake.svg";
 import { ReactComponent as WineSVG } from "../../img/wine.svg";
+import { ReactComponent as HomeSVG } from "../../img/home.svg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
     menu: {
       backgroundColor: theme.palette.primary.main,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
@@ -62,7 +67,6 @@ export default function Navbar() {
     <Fragment>
       <IconButton
         edge="start"
-        className={classes.menuButton}
         color="inherit"
         aria-label="menu"
         aria-controls="drink-menu"
@@ -95,6 +99,18 @@ export default function Navbar() {
             Wine
           </Typography>
         </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <BeerSVG className={classes.svgStyle} />
+          <Typography color="secondary" variant="h6">
+            Beer
+          </Typography>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <SakeSVG className={classes.svgStyle} />
+          <Typography color="secondary" variant="h6">
+            Sake
+          </Typography>
+        </MenuItem>
       </Menu>
     </Fragment>
   );
@@ -103,7 +119,6 @@ export default function Navbar() {
     <Fragment>
       <IconButton
         edge="start"
-        className={classes.menuButton}
         color="inherit"
         aria-label="menu"
         aria-controls="collapsed-menu"
@@ -125,10 +140,12 @@ export default function Navbar() {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <TempuraSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Appetizers
-          </Typography>
+          <IconButton component={Link} to="/appetizers">
+            <TempuraSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Appetizers
+            </Typography>
+          </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <NoodleSVG className={classes.svgStyle} />
@@ -156,6 +173,9 @@ export default function Navbar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          <IconButton component={Link} to="/">
+            <HomeSVG className={classes.svgStyle} />
+          </IconButton>
           {DrinkMenu}
           {AppetizerMenu}
         </Toolbar>

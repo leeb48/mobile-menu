@@ -11,18 +11,13 @@ class AppetizerItem(models.Model):
         ('SA', 'Salads')
     )
 
-    VEGETARIAN_OPTIONS = (
-        ('V', 'Vegetarian'),
-    )
-
     name = models.CharField(max_length=60)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='food_images',
                               default='food_images/default.jpg')
     description = models.TextField()
     category = models.CharField(max_length=2, choices=APPETIZER_CATEGOREIS)
-    vegetarian_options = models.CharField(
-        max_length=2, choices=VEGETARIAN_OPTIONS, null=True, blank=True)
+    vegetarian_options = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -35,18 +30,13 @@ class NigiriItem(models.Model):
         ('C', 'Cooked'),
     )
 
-    VEGETARIAN_OPTIONS = (
-        ('V', 'Vegetarian'),
-    )
-
     name = models.CharField(max_length=60)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='food_images',
                               default='food_images/default.jpg')
     description = models.TextField()
     category = models.CharField(max_length=1, choices=NIGIRI_CATEGORIES)
-    vegetarian_options = models.CharField(
-        max_length=2, choices=VEGETARIAN_OPTIONS, null=True, blank=True)
+    vegetarian_options = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -61,24 +51,15 @@ class RollItem(models.Model):
         ('V', 'Vegetarian')
     )
 
-    SPICY_OPTIONS = (
-        ('S', 'Spicy'),
-    )
-
-    HAND_ROLL_OPTIONS = (
-        ('H', 'Hand Rolls'),
-    )
-
     name = models.CharField(max_length=60)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='food_images',
                               default='food_images/default.jpg')
     description = models.TextField()
     category = models.CharField(max_length=1, choices=ROLL_CATEGORIES)
-    spicy_options = models.CharField(
-        max_length=1, choices=SPICY_OPTIONS, null=True, blank=True)
-    hand_roll_options = models.CharField(
-        max_length=1, choices=HAND_ROLL_OPTIONS, null=True, blank=True)
+    spicy_options = models.BooleanField(default=False)
+    hand_roll_options = models.BooleanField(default=False)
+    vegetarian_options = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

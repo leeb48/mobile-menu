@@ -1,27 +1,27 @@
 import { Dispatch } from "react";
 import menuAxios from "../../config/menuAxios";
-import { IFoodItem } from "../interfaces";
+import { IAppetizers } from "../interfaces";
 
 // Action types
 export enum MenuActionTypes {
-  GET_ALL_FOOD_ITEMS = "food-items/get-all",
+  GET_ALL_APPETIZERS = "food/get-all-appetizers",
 }
 export type MenuActions = IGetAllFoodItemsAction;
 
 //-------------------------------------------------------------------------
 // * Get all food items action
 interface IGetAllFoodItemsAction {
-  type: MenuActionTypes.GET_ALL_FOOD_ITEMS;
-  payload: IFoodItem[];
+  type: MenuActionTypes.GET_ALL_APPETIZERS;
+  payload: IAppetizers[];
 }
 
-export const getAllFoodItems = async (
+export const getAppetizers = async (
   dispatch: Dispatch<IGetAllFoodItemsAction>
 ) => {
-  const res = await menuAxios.get("/menu/get-all-food-items");
+  const res = await menuAxios.get("/menu/appetizers");
 
   return dispatch({
-    type: MenuActionTypes.GET_ALL_FOOD_ITEMS,
+    type: MenuActionTypes.GET_ALL_APPETIZERS,
     payload: res.data,
   });
 };
