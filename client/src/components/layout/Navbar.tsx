@@ -18,9 +18,7 @@ import { ReactComponent as WineSVG } from "../../img/wine.svg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
+    root: {},
     menu: {
       backgroundColor: theme.palette.primary.main,
     },
@@ -42,26 +40,22 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Navbar() {
   const classes = useStyles();
 
-  const [
-    appetizerAnchorEl,
-    setAppetizerAnchorEl,
-  ] = useState<null | HTMLElement>(null);
-  const [drinkAnchorEl, setDrinkAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<{
+    drinkEl: null | HTMLElement;
+    appetizerEl: null | HTMLElement;
+  }>({
+    drinkEl: null,
+    appetizerEl: null,
+  });
 
-  const handleAppetizerClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAppetizerAnchorEl(event.currentTarget);
-  };
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) =>
+    setAnchorEl({ ...anchorEl, [e.currentTarget.name]: e.currentTarget });
 
-  const handleDrinkClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setDrinkAnchorEl(event.currentTarget);
-  };
-
-  const handleAppletizerClose = () => {
-    setAppetizerAnchorEl(null);
-  };
-
-  const handleDrinkClose = () => {
-    setDrinkAnchorEl(null);
+  const handleClose = () => {
+    setAnchorEl({
+      appetizerEl: null,
+      drinkEl: null,
+    });
   };
 
   const DrinkMenu = (
@@ -73,28 +67,29 @@ export default function Navbar() {
         aria-label="menu"
         aria-controls="drink-menu"
         aria-haspopup="true"
-        onClick={handleDrinkClick}
+        name="drinkEl"
+        onClick={handleClick}
       >
         <DrinkSVG className={classes.svgStyle} />
       </IconButton>
 
       <Menu
-        id="drink-menu"
-        anchorEl={drinkAnchorEl}
+        id="drinkEl"
+        anchorEl={anchorEl.drinkEl}
         keepMounted
-        open={Boolean(drinkAnchorEl)}
-        onClose={handleDrinkClose}
+        open={Boolean(anchorEl.drinkEl)}
+        onClose={handleClose}
         PopoverClasses={{
           paper: classes.menu,
         }}
       >
-        <MenuItem onClick={handleDrinkClose}>
+        <MenuItem onClick={handleClose}>
           <SodaSVG className={classes.svgStyle} />
           <Typography color="secondary" variant="h6">
             Soft Drinks
           </Typography>
         </MenuItem>
-        <MenuItem onClick={handleDrinkClose}>
+        <MenuItem onClick={handleClose}>
           <WineSVG className={classes.svgStyle} />
           <Typography color="secondary" variant="h6">
             Wine
@@ -113,40 +108,41 @@ export default function Navbar() {
         aria-label="menu"
         aria-controls="collapsed-menu"
         aria-haspopup="true"
-        onClick={handleAppetizerClick}
+        name="appetizerEl"
+        onClick={handleClick}
       >
         <AppetizerSVG className={classes.svgStyle} />
       </IconButton>
 
       <Menu
         id="collapsed-menu"
-        anchorEl={appetizerAnchorEl}
+        anchorEl={anchorEl.appetizerEl}
         keepMounted
-        open={Boolean(appetizerAnchorEl)}
-        onClose={handleAppletizerClose}
+        open={Boolean(anchorEl.appetizerEl)}
+        onClose={handleClose}
         PopoverClasses={{
           paper: classes.menu,
         }}
       >
-        <MenuItem onClick={handleAppletizerClose}>
+        <MenuItem onClick={handleClose}>
           <TempuraSVG className={classes.svgStyle} />
           <Typography color="secondary" variant="h6">
             Appetizers
           </Typography>
         </MenuItem>
-        <MenuItem onClick={handleAppletizerClose}>
+        <MenuItem onClick={handleClose}>
           <NoodleSVG className={classes.svgStyle} />
           <Typography color="secondary" variant="h6">
             Noodles
           </Typography>
         </MenuItem>
-        <MenuItem onClick={handleAppletizerClose}>
+        <MenuItem onClick={handleClose}>
           <SoupSVG className={classes.svgStyle} />
           <Typography color="secondary" variant="h6">
             Soups
           </Typography>
         </MenuItem>
-        <MenuItem onClick={handleAppletizerClose}>
+        <MenuItem onClick={handleClose}>
           <SaladSVG className={classes.svgStyle} />
           <Typography color="secondary" variant="h6">
             Salads
