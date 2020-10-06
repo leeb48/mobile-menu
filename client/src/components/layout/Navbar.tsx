@@ -117,7 +117,7 @@ export default function Navbar() {
           </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="wine">
+          <IconButton component={Link} to="wine-menu">
             <WineSVG className={classes.svgStyle} />
             <Typography color="secondary" variant="h6">
               Wine
@@ -125,7 +125,7 @@ export default function Navbar() {
           </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="beer">
+          <IconButton component={Link} to="beer-menu">
             <BeerSVG className={classes.svgStyle} />
             <Typography color="secondary" variant="h6">
               Beer
