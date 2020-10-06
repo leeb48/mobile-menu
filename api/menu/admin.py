@@ -68,3 +68,11 @@ class SakeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SakeItem, SakeAdmin)
+
+
+class SoftDrinkAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'category')
+    search_fields = ('name', 'category')
+
+
+admin.site.register(SoftDrinkItem, SoftDrinkAdmin)

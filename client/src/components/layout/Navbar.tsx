@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     svgStyle: {
       fill: theme.palette.secondary.main,
-      width: "3rem",
-      height: "3rem",
+      width: "2rem",
+      height: "2rem",
       marginRight: "10px",
     },
   })
@@ -88,28 +88,36 @@ export default function Navbar() {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <SodaSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Soft Drinks
-          </Typography>
+          <IconButton component={Link} to="soft-drinks">
+            <SodaSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Soft Drinks
+            </Typography>
+          </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <WineSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Wine
-          </Typography>
+          <IconButton component={Link} to="wine">
+            <WineSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Wine
+            </Typography>
+          </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <BeerSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Beer
-          </Typography>
+          <IconButton component={Link} to="beer">
+            <BeerSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Beer
+            </Typography>
+          </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <SakeSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Sake
-          </Typography>
+          <IconButton component={Link} to="sake">
+            <SakeSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Sake
+            </Typography>
+          </IconButton>
         </MenuItem>
       </Menu>
     </Fragment>
@@ -148,22 +156,28 @@ export default function Navbar() {
           </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <NoodleSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Noodles
-          </Typography>
+          <IconButton component={Link} to="noodles">
+            <NoodleSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Noodles
+            </Typography>
+          </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <SoupSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Soups
-          </Typography>
+          <IconButton component={Link} to="soups">
+            <SoupSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Soups
+            </Typography>
+          </IconButton>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <SaladSVG className={classes.svgStyle} />
-          <Typography color="secondary" variant="h6">
-            Salads
-          </Typography>
+          <IconButton component={Link} to="salads">
+            <SaladSVG className={classes.svgStyle} />
+            <Typography color="secondary" variant="h6">
+              Salads
+            </Typography>
+          </IconButton>
         </MenuItem>
       </Menu>
     </Fragment>

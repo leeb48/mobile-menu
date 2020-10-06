@@ -2,13 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Store } from "../../store/Store";
 
 // Actions
-import {
-  getAppetizers,
-  getVegeAppetizers,
-  showAllAppetizers,
-} from "../../store/actions";
-
-// Material UI Imports
+import { getSoftDrinks } from "../../store/actions";
 import {
   Button,
   createStyles,
@@ -41,21 +35,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AppetizerMenu = () => {
+const SoftDrinksMenu = () => {
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
 
   useEffect(() => {
-    getAppetizers(dispatch);
+    getSoftDrinks(dispatch);
   }, [dispatch]);
-
-  const handleVegetarianBtn = () => {
-    getVegeAppetizers(state, dispatch);
-  };
-
-  const handleShowAllBtn = () => {
-    showAllAppetizers(state, dispatch);
-  };
 
   const renderMenu = state.currentMenu.map((item) => (
     <GridListTile key={item.image}>
@@ -77,19 +63,14 @@ const AppetizerMenu = () => {
     <Fragment>
       <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
         <ListSubheader component="div">
-          <Button
-            onClick={handleShowAllBtn}
-            variant="outlined"
-            color="secondary"
-          >
+          <Button variant="outlined" color="secondary">
             Show All
           </Button>
-          <Button
-            onClick={handleVegetarianBtn}
-            variant="outlined"
-            color="secondary"
-          >
-            Vegetarian
+          <Button variant="outlined" color="secondary">
+            Refillable
+          </Button>
+          <Button variant="outlined" color="secondary">
+            Non-Refillable
           </Button>
         </ListSubheader>
       </GridListTile>
@@ -110,4 +91,4 @@ const AppetizerMenu = () => {
   );
 };
 
-export default AppetizerMenu;
+export default SoftDrinksMenu;
