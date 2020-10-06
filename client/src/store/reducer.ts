@@ -17,7 +17,7 @@ export const reducer = (state = initialState, action: Actions): IState => {
         currentMenu: action.payload,
       };
 
-    case MenuActionTypes.GET_VEGE_APPETIZERS:
+    case MenuActionTypes.SHOW_VEGE_APPETIZERS:
     case MenuActionTypes.SHOW_ALL_APPETIZERS:
       return {
         ...state,
@@ -28,6 +28,13 @@ export const reducer = (state = initialState, action: Actions): IState => {
       return {
         ...state,
         softDrinks: action.payload,
+        currentMenu: action.payload,
+      };
+    case MenuActionTypes.SHOW_ALL_SOFT_DRINKS:
+    case MenuActionTypes.SHOW_REFILLABLE_DRINKS:
+    case MenuActionTypes.SHOW_NON_REFILLABLE_DRINKS:
+      return {
+        ...state,
         currentMenu: action.payload,
       };
 

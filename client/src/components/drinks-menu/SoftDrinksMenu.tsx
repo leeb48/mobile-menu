@@ -2,7 +2,12 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Store } from "../../store/Store";
 
 // Actions
-import { getSoftDrinks } from "../../store/actions";
+import {
+  getSoftDrinks,
+  showAllSoftDrinks,
+  showRefillableDrinks,
+  showNonRefillableDrinks,
+} from "../../store/actions";
 import {
   Button,
   createStyles,
@@ -59,17 +64,41 @@ const SoftDrinksMenu = () => {
     </GridListTile>
   ));
 
+  const handleShowAllSoftDrinks = () => {
+    showAllSoftDrinks(state, dispatch);
+  };
+
+  const handleShowRefillableDrinks = () => {
+    showRefillableDrinks(state, dispatch);
+  };
+
+  const handleShowNonRefillableDrinks = () => {
+    showNonRefillableDrinks(state, dispatch);
+  };
+
   return (
     <Fragment>
       <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
         <ListSubheader component="div">
-          <Button variant="outlined" color="secondary">
+          <Button
+            onClick={handleShowAllSoftDrinks}
+            variant="outlined"
+            color="secondary"
+          >
             Show All
           </Button>
-          <Button variant="outlined" color="secondary">
+          <Button
+            onClick={handleShowRefillableDrinks}
+            variant="outlined"
+            color="secondary"
+          >
             Refillable
           </Button>
-          <Button variant="outlined" color="secondary">
+          <Button
+            onClick={handleShowNonRefillableDrinks}
+            variant="outlined"
+            color="secondary"
+          >
             Non-Refillable
           </Button>
         </ListSubheader>
