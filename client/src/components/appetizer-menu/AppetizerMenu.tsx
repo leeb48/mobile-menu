@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Store } from "../../store/Store";
 
 // Actions
@@ -9,6 +9,7 @@ import {
   GridList,
   GridListTile,
   GridListTileBar,
+  Hidden,
   IconButton,
   ListSubheader,
   makeStyles,
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
     },
     gridList: {
-      width: 800,
+      width: "100%",
       height: "100%",
     },
     icon: {
@@ -34,41 +35,56 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AppetizerMenu = () => {
+const AppetizerMenu = (props: any) => {
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
 
   useEffect(() => {
     getAppetizers(dispatch);
-  }, [getAppetizers]);
+  }, [dispatch]);
+
+  const renderAppetizer = state.appetizers.map((item) => (
+    <GridListTile key={item.image}>
+      <img src={item.image} alt={item.name} />
+      <GridListTileBar
+        title={item.name}
+        subtitle={<span>{item.description}</span>}
+        actionIcon={
+          <IconButton
+            aria-label={`info about ${item.name}`}
+            className={classes.icon}
+          ></IconButton>
+        }
+      />
+    </GridListTile>
+  ));
 
   return (
-    <div className={classes.root}>
-      <GridList cellHeight={300} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-          <ListSubheader component="div">
-            <Button variant="outlined" color="secondary">
-              Vegetarian
-            </Button>
-          </ListSubheader>
-        </GridListTile>
-        {state.appetizers.map((item) => (
-          <GridListTile key={item.image}>
-            <img src={item.image} alt={item.name} />
-            <GridListTileBar
-              title={item.name}
-              subtitle={<span>{item.description}</span>}
-              actionIcon={
-                <IconButton
-                  aria-label={`info about ${item.name}`}
-                  className={classes.icon}
-                ></IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+    <Fragment>
+      <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
+        <ListSubheader component="div">
+          <Button variant="outlined" color="secondary">
+            Show All
+          </Button>
+          <Button variant="outlined" color="secondary">
+            Vegetarian
+          </Button>
+        </ListSubheader>
+      </GridListTile>
+      <div className={classes.root}>
+        <Hidden only={["md", "lg", "xl"]}>
+          <GridList cellHeight={200} cols={2} className={classes.gridList}>
+            {renderAppetizer}
+          </GridList>
+        </Hidden>
+
+        <Hidden only={["xs", "sm"]}>
+          <GridList cellHeight={400} cols={3} className={classes.gridList}>
+            {renderAppetizer}
+          </GridList>
+        </Hidden>
+      </div>
+    </Fragment>
   );
 };
 
