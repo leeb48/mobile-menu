@@ -23,6 +23,9 @@ import { ReactComponent as BeerSVG } from "../../img/beer.svg";
 import { ReactComponent as SakeSVG } from "../../img/sake.svg";
 import { ReactComponent as WineSVG } from "../../img/wine.svg";
 import { ReactComponent as HomeSVG } from "../../img/home.svg";
+import { ReactComponent as NigiriSVG } from "../../img/nigiri.svg";
+import { ReactComponent as SushiRollSVG } from "../../img/sushi-rolls.svg";
+import { ReactComponent as ExtraSVG } from "../../img/extra.svg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,8 +38,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     svgStyle: {
       fill: theme.palette.secondary.main,
-      width: "2rem",
-      height: "2rem",
+      [theme.breakpoints.up("sm")]: {
+        width: "3rem",
+        height: "3rem",
+      },
+      width: "1.5rem",
+      height: "1.5rem",
+      marginRight: "10px",
+    },
+
+    svgStyle2: {
+      fill: theme.palette.secondary.main,
+      [theme.breakpoints.up("sm")]: {
+        width: "3rem",
+        height: "2rem",
+      },
+      width: "1.5rem",
+      height: "1rem",
       marginRight: "10px",
     },
   })
@@ -48,9 +66,11 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState<{
     drinkEl: null | HTMLElement;
     appetizerEl: null | HTMLElement;
+    extraEl: null | HTMLElement;
   }>({
     drinkEl: null,
     appetizerEl: null,
+    extraEl: null,
   });
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) =>
@@ -60,6 +80,7 @@ export default function Navbar() {
     setAnchorEl({
       appetizerEl: null,
       drinkEl: null,
+      extraEl: null,
     });
   };
 
@@ -74,7 +95,7 @@ export default function Navbar() {
         name="drinkEl"
         onClick={handleClick}
       >
-        <DrinkSVG className={classes.svgStyle} />
+        <DrinkSVG className={classes.svgStyle2} />
       </IconButton>
 
       <Menu
@@ -183,15 +204,72 @@ export default function Navbar() {
     </Fragment>
   );
 
+  const SushiMenu = (
+    <IconButton edge="start" color="inherit" aria-label="menu">
+      <NigiriSVG className={classes.svgStyle} />
+    </IconButton>
+  );
+
+  const RollMenu = (
+    <IconButton edge="start" color="inherit" aria-label="menu">
+      <SushiRollSVG className={classes.svgStyle} />
+    </IconButton>
+  );
+
+  const ExtraMenu = (
+    <Fragment>
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        aria-controls="collapsed-menu"
+        aria-haspopup="true"
+        name="extraEl"
+        onClick={handleClick}
+      >
+        <ExtraSVG className={classes.svgStyle} />
+      </IconButton>
+
+      <Menu
+        id="collapsed-menu"
+        anchorEl={anchorEl.extraEl}
+        keepMounted
+        open={Boolean(anchorEl.extraEl)}
+        onClose={handleClose}
+        PopoverClasses={{
+          paper: classes.menu,
+        }}
+      >
+        <MenuItem onClick={handleClose}>
+          <IconButton component={Link} to="/appetizers">
+            <Typography color="secondary" variant="h6">
+              Desert
+            </Typography>
+          </IconButton>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <IconButton component={Link} to="noodles">
+            <Typography color="secondary" variant="h6">
+              Extra Items
+            </Typography>
+          </IconButton>
+        </MenuItem>
+      </Menu>
+    </Fragment>
+  );
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton component={Link} to="/">
-            <HomeSVG className={classes.svgStyle} />
+            <HomeSVG className={classes.svgStyle2} />
           </IconButton>
           {DrinkMenu}
           {AppetizerMenu}
+          {SushiMenu}
+          {RollMenu}
+          {ExtraMenu}
         </Toolbar>
       </AppBar>
     </div>
