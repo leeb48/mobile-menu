@@ -1,6 +1,6 @@
-import { Actions } from './actions';
-import { IState } from './interfaces';
-import { MenuActionTypes } from './actions';
+import { Actions } from "./actions";
+import { IState } from "./interfaces";
+import { MenuActionTypes } from "./actions";
 
 export const initialState: IState = {
   softDrinks: [],
@@ -10,6 +10,7 @@ export const initialState: IState = {
 };
 export const reducer = (state = initialState, action: Actions): IState => {
   switch (action.type) {
+    // * Appetizers
     case MenuActionTypes.GET_ALL_APPETIZERS:
       return {
         ...state,
@@ -24,6 +25,7 @@ export const reducer = (state = initialState, action: Actions): IState => {
         currentMenu: action.payload,
       };
 
+    // * Soft Drinks
     case MenuActionTypes.GET_ALL_SOFT_DRINKS:
       return {
         ...state,
@@ -38,10 +40,18 @@ export const reducer = (state = initialState, action: Actions): IState => {
         currentMenu: action.payload,
       };
 
+    // * Sake
     case MenuActionTypes.GET_ALL_SAKE:
       return {
         ...state,
         sakes: action.payload,
+        currentMenu: action.payload,
+      };
+    case MenuActionTypes.SHOW_ALL_SAKE:
+    case MenuActionTypes.SHOW_HOUSE_SAKE:
+    case MenuActionTypes.SHOW_GIN_JO:
+      return {
+        ...state,
         currentMenu: action.payload,
       };
 
