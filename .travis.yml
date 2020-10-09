@@ -1,0 +1,28 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+after_success:
+  - docker build -t bongster228/yama-menu-api ./api
+  - docker build -t bongster228/yama-menu-client ./client
+  - docker build -t bongster228/yama-menu-nginx ./nginx
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push bongster228/yama-menu-api
+  - docker push bongster228/yama-menu-client
+  - docker push bongster228/yama-menu-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: yama-menu
+  env: YamaMenu-env
+  bucket_name: django-menu-files
+  bucket_path: yama-menu-travis
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

@@ -52,9 +52,10 @@ services:
     restart: always
     build:
       context: ./api
+      args:
+        DEBUG: 0
+        DJANGO_SECRET_KEY: "thisisasecret"
     environment:
-      DEBUG: 0
-      DJANGO_SECRET_KEY: "thisisasecret"
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_STORAGE_BUCKET_NAME: ${AWS_STORAGE_BUCKET_NAME}

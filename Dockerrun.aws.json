@@ -1,0 +1,32 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "bongster228/yama-menu-client",
+      "hostname": "client",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "api",
+      "image": "bongster228/yama-menu-api",
+      "hostname": "api",
+      "essential": false,
+      "memory": 512
+    },
+    {
+      "name": "nginx",
+      "image": "bongster228/yama-menu-nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "api"],
+      "memory": 128
+    }
+  ]
+}
