@@ -17,26 +17,13 @@ export enum MenuActionTypes {
   SHOW_NON_REFILLABLE_DRINKS = "soft-drinks/non_refillable",
   // Sake Actions
   GET_ALL_SAKE = "sake/get-all",
-  SHOW_ALL_SAKE = "sake/show-all",
-  SHOW_HOUSE_SAKE = "sake/show-house",
-  SHOW_GIN_JO = "sake/show-gin-jo",
-  SHOW_JUN_MAI = "sake/show-jun-mai",
-  SHWO_DAI_GIN_JO = "sake/show-dai-gin-jo",
-  SHOW_NIGORI = "sake/nigori",
-  SHOW_SPARKLING = "sake/sparkling",
-  SHOW_FLAVORED = "sake/flavored",
-  SHOW_SOJU = "sake/soju",
-  SHOW_SHOOTER = "sake/shooters",
+  FILTER_SAKE = "sake/filter",
 }
 export type MenuActions = AppetizerActions | SoftDrinkActions | SakeActions;
 
 //-------------------------------------------------------------------------
 // * Sake Actions
-type SakeActions =
-  | IGetAllSakeAction
-  | IShowAllSake
-  | IShowHouseSake
-  | IShowGinjo;
+type SakeActions = IGetAllSakeAction | IFilterSakeAction;
 
 interface IGetAllSakeAction {
   type: MenuActionTypes.GET_ALL_SAKE;
@@ -52,53 +39,27 @@ export const getSake = async (dispatch: Dispatch<IGetAllSakeAction>) => {
   });
 };
 
-interface IShowAllSake {
-  type: MenuActionTypes.SHOW_ALL_SAKE;
+interface IFilterSakeAction {
+  type: MenuActionTypes.FILTER_SAKE;
   payload: ISake[];
 }
 
-export const showAllSake = async (
+export const filterSake = async (
   state: IState,
-  dispatch: Dispatch<IShowAllSake>
+  dispatch: Dispatch<IFilterSakeAction>,
+  filterOption: ISake["category"]
 ) => {
-  const res = state.sakes;
+  if (filterOption === "AL") {
+    return dispatch({
+      type: MenuActionTypes.FILTER_SAKE,
+      payload: state.sakes,
+    });
+  }
+
+  const res = state.sakes.filter((sake) => sake.category === filterOption);
 
   return dispatch({
-    type: MenuActionTypes.SHOW_ALL_SAKE,
-    payload: res,
-  });
-};
-
-interface IShowHouseSake {
-  type: MenuActionTypes.SHOW_HOUSE_SAKE;
-  payload: ISake[];
-}
-
-export const showHouseSake = async (
-  state: IState,
-  dispatch: Dispatch<IShowHouseSake>
-) => {
-  const res = state.sakes.filter((sake) => sake.category === "H");
-
-  return dispatch({
-    type: MenuActionTypes.SHOW_HOUSE_SAKE,
-    payload: res,
-  });
-};
-
-interface IShowGinjo {
-  type: MenuActionTypes.SHOW_GIN_JO;
-  payload: ISake[];
-}
-
-export const showGinjo = async (
-  state: IState,
-  dispatch: Dispatch<IShowGinjo>
-) => {
-  const res = state.sakes.filter((sake) => sake.category === "G");
-
-  return dispatch({
-    type: MenuActionTypes.SHOW_GIN_JO,
+    type: MenuActionTypes.FILTER_SAKE,
     payload: res,
   });
 };

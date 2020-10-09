@@ -1,0 +1,24 @@
+FROM python:3.8
+ENV PYTHONUNBUFFERED 1
+
+ARG DJANGO_SECRET_KEY
+ARG DEBUG
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_STORAGE_BUCKET_NAME
+
+ENV DJANGO_SECRET_KEY ${DJANGO_SECRET_KEY}
+ENV DEBUG ${DEBUG}
+ENV AWS_ACCESS_KEY_ID ${AWS_ACCESS_KEY_ID}
+ENV AWS_SECRET_ACCESS_KEY ${AWS_SECRET_ACCESS_KEY}
+ENV AWS_STORAGE_BUCKET_NAME ${AWS_STORAGE_BUCKET_NAME}
+
+WORKDIR /app
+RUN python -m pip install --upgrade pip
+COPY ./requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . .
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+EXPOSE 8000
+CMD ["gunicorn", "api.wsgi", "--bind", "0.0.0.0:8000"]

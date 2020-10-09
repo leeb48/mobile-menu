@@ -2,12 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Store } from "../../store/Store";
 
 // Actions
-import {
-  getSake,
-  showAllSake,
-  showHouseSake,
-  showGinjo,
-} from "../../store/actions";
+import { getSake, filterSake } from "../../store/actions";
 import {
   Button,
   createStyles,
@@ -17,6 +12,7 @@ import {
   makeStyles,
   Theme,
 } from "@material-ui/core";
+import { ISake } from "../../store/interfaces";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +25,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     gridItem: {
       textAlign: "center",
+    },
+    gridImg: {
+      maxWidth: "100%",
+      maxHeight: "100%",
+      objectFit: "contain",
+    },
+    filterButton: {
+      marginRight: "5px",
     },
     icon: {
       color: "rgba(255, 255, 255, 0.54)",
@@ -45,48 +49,52 @@ const SakeMenu = () => {
   }, [dispatch]);
 
   // Filter Button Handlers
-  const handleShowAll = () => {
-    showAllSake(state, dispatch);
-  };
-
-  const handleShowHouseSake = () => {
-    showHouseSake(state, dispatch);
-  };
-
-  const handleShowGinjo = () => {
-    showGinjo(state, dispatch);
+  const handleFilter = (filter: ISake["category"]) => {
+    filterSake(state, dispatch, filter);
   };
 
   return (
     <Fragment>
       <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
         <ListSubheader component="div">
-          <Button onClick={handleShowAll} variant="outlined" color="secondary">
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("AL")}
+            variant="outlined"
+            color="secondary"
+          >
             Show All
           </Button>
           <Button
-            onClick={handleShowHouseSake}
+            className={classes.filterButton}
+            onClick={() => handleFilter("H")}
             variant="outlined"
             color="secondary"
           >
             House Sake
           </Button>
-          <Button variant="outlined" color="secondary">
-            Jun-Mai
-          </Button>
           <Button
-            onClick={handleShowGinjo}
+            className={classes.filterButton}
+            onClick={() => handleFilter("G")}
             variant="outlined"
             color="secondary"
           >
             Gin-Jo
+          </Button>
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("J")}
+            variant="outlined"
+            color="secondary"
+          >
+            Jun-Mai
           </Button>
         </ListSubheader>
       </GridListTile>
       <Grid container>
         {state.currentMenu.map((menu) => (
           <Grid className={classes.gridItem} xs={12} item>
-            <img src={menu.image} alt="" />
+            <img className={classes.gridImg} src={menu.image} alt="" />
           </Grid>
         ))}
       </Grid>

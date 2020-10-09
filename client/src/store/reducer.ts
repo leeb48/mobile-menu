@@ -47,9 +47,7 @@ export const reducer = (state = initialState, action: Actions): IState => {
         sakes: action.payload,
         currentMenu: action.payload,
       };
-    case MenuActionTypes.SHOW_ALL_SAKE:
-    case MenuActionTypes.SHOW_HOUSE_SAKE:
-    case MenuActionTypes.SHOW_GIN_JO:
+    case MenuActionTypes.FILTER_SAKE:
       return {
         ...state,
         currentMenu: action.payload,

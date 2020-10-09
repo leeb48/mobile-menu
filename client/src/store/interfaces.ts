@@ -8,7 +8,7 @@ export interface IState {
 export interface ISake {
   name: string;
   image: string;
-  category: 'H' | 'G' | 'J' | 'D' | 'N' | 'S' | 'F' | 'SJ' | 'SH';
+  category: "H" | "G" | "J" | "D" | "N" | "S" | "F" | "SJ" | "SH" | "AL";
 }
 
 export interface ISoftDrinks {
@@ -16,7 +16,7 @@ export interface ISoftDrinks {
   price: number;
   image: string;
   description: string;
-  category: 'R' | 'NR';
+  category: "R" | "NR";
 }
 
 export interface IAppetizers {
@@ -24,6 +24,6 @@ export interface IAppetizers {
   price: number;
   image: string;
   description: string;
-  category: 'A' | 'N' | 'S' | 'SA';
+  category: "A" | "N" | "S" | "SA";
   vegetarian_options: boolean;
 }
