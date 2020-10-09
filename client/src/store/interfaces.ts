@@ -1,16 +1,14 @@
 export interface IState {
   softDrinks: ISoftDrinks[];
-  wines: IWine[];
+  sakes: ISake[];
   appetizers: IAppetizers[];
   currentMenu: any[];
 }
 
-export interface IWine {
+export interface ISake {
   name: string;
-  price: number;
   image: string;
-  description: string;
-  category: "W" | "R";
+  category: 'H' | 'G' | 'J' | 'D' | 'N' | 'S' | 'F' | 'SJ' | 'SH';
 }
 
 export interface ISoftDrinks {
@@ -18,7 +16,7 @@ export interface ISoftDrinks {
   price: number;
   image: string;
   description: string;
-  category: "R" | "NR";
+  category: 'R' | 'NR';
 }
 
 export interface IAppetizers {
@@ -26,6 +24,6 @@ export interface IAppetizers {
   price: number;
   image: string;
   description: string;
-  category: "A" | "N" | "S" | "SA";
+  category: 'A' | 'N' | 'S' | 'SA';
   vegetarian_options: boolean;
 }

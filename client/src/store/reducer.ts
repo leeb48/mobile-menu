@@ -1,10 +1,10 @@
-import { Actions } from "./actions";
-import { IState } from "./interfaces";
-import { MenuActionTypes } from "./actions";
+import { Actions } from './actions';
+import { IState } from './interfaces';
+import { MenuActionTypes } from './actions';
 
 export const initialState: IState = {
   softDrinks: [],
-  wines: [],
+  sakes: [],
   appetizers: [],
   currentMenu: [],
 };
@@ -35,6 +35,13 @@ export const reducer = (state = initialState, action: Actions): IState => {
     case MenuActionTypes.SHOW_NON_REFILLABLE_DRINKS:
       return {
         ...state,
+        currentMenu: action.payload,
+      };
+
+    case MenuActionTypes.GET_ALL_SAKE:
+      return {
+        ...state,
+        sakes: action.payload,
         currentMenu: action.payload,
       };
 

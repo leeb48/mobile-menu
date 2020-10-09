@@ -63,7 +63,7 @@ admin.site.register(BeerItem, BeerAdmin)
 
 
 class SakeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'category')
+    list_display = ('name',  'category')
     search_fields = ('name', 'category')
 
 

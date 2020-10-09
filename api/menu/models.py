@@ -170,10 +170,10 @@ class SakeItem(models.Model):
     )
 
     name = models.CharField(max_length=60)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    # price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='food_images',
                               default='food_images/default.jpg')
-    description = models.TextField()
+    # description = models.TextField()
     category = models.CharField(max_length=2, choices=SAKE_CATEGORIES)
 
     def __str__(self):

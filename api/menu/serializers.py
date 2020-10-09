@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import AppetizerItem, SoftDrinkItem
+from .models import AppetizerItem, SoftDrinkItem, SakeItem
 
 
 class AppetizerSerializer(serializers.ModelSerializer):
@@ -16,3 +16,10 @@ class SoftDrinkSerializer(serializers.ModelSerializer):
         model = SoftDrinkItem
         fields = ('name', 'price', 'image', 'description',
                   'category')
+
+
+class SakeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SakeItem
+        fields = ('name', 'image', 'category')
