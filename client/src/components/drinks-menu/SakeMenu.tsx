@@ -89,6 +89,58 @@ const SakeMenu = () => {
           >
             Jun-Mai
           </Button>
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("D")}
+            variant="outlined"
+            color="secondary"
+          >
+            Dai-Gin-Jo
+          </Button>
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("N")}
+            variant="outlined"
+            color="secondary"
+          >
+            Nigori
+          </Button>
+
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("S")}
+            variant="outlined"
+            color="secondary"
+          >
+            Sparkling
+          </Button>
+
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("F")}
+            variant="outlined"
+            color="secondary"
+          >
+            Flavored
+          </Button>
+
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("SJ")}
+            variant="outlined"
+            color="secondary"
+          >
+            Soju
+          </Button>
+
+          <Button
+            className={classes.filterButton}
+            onClick={() => handleFilter("SH")}
+            variant="outlined"
+            color="secondary"
+          >
+            Shooter
+          </Button>
         </ListSubheader>
       </GridListTile>
       <Grid container>
