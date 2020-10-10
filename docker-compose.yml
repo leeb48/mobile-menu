@@ -2,42 +2,6 @@ version: "3"
 
 services:
   # Dev Mode
-  # nginx:
-  #   depends_on:
-  #     - api
-  #     - client
-  #   restart: always
-  #   build:
-  #     context: ./nginx
-  #     dockerfile: Dockerfile.dev
-  #   ports:
-  #     - "80:80"
-
-  # api:
-  #   restart: always
-  #   build:
-  #     context: ./api
-  #     dockerfile: Dockerfile.dev
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   volumes:
-  #     - ./api:/app
-  #   environment:
-  #     AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-  #     AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-  #     AWS_STORAGE_BUCKET_NAME: ${AWS_STORAGE_BUCKET_NAME}
-
-  # client:
-  #   stdin_open: true
-  #   restart: always
-  #   build:
-  #     context: ./client
-  #     dockerfile: Dockerfile.dev
-  #   command: npm start
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./client:/app
-
-  # Production Mode
   nginx:
     depends_on:
       - api
@@ -45,6 +9,7 @@ services:
     restart: always
     build:
       context: ./nginx
+      dockerfile: Dockerfile.dev
     ports:
       - "80:80"
 
@@ -52,9 +17,10 @@ services:
     restart: always
     build:
       context: ./api
-      args:
-        DEBUG: 0
-        DJANGO_SECRET_KEY: "thisisasecret"
+      dockerfile: Dockerfile.dev
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./api:/app
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
@@ -65,3 +31,37 @@ services:
     restart: always
     build:
       context: ./client
+      dockerfile: Dockerfile.dev
+    command: npm start
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
+  # Production Mode
+  # nginx:
+  #   depends_on:
+  #     - api
+  #     - client
+  #   restart: always
+  #   build:
+  #     context: ./nginx
+  #   ports:
+  #     - "80:80"
+
+  # api:
+  #   restart: always
+  #   build:
+  #     context: ./api
+  #     args:
+  #       DEBUG: 0
+  #       DJANGO_SECRET_KEY: "thisisasecret"
+  #   environment:
+  #     AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  #     AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  #     AWS_STORAGE_BUCKET_NAME: ${AWS_STORAGE_BUCKET_NAME}
+
+  # client:
+  #   stdin_open: true
+  #   restart: always
+  #   build:
+  #     context: ./client

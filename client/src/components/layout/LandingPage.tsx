@@ -4,8 +4,8 @@ import React from "react";
 const LandingPage = () => {
   return (
     <Grid container justify="center">
-      <Grid item sm={12} md={7}>
-        <Card style={{ width: "100%" }}>
+      <Grid item sm={12} md={10}>
+        <Card style={{ width: "100%", marginTop: "2rem" }}>
           <CardMedia
             component="img"
             alt="Landing Page"
