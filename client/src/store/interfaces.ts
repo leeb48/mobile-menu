@@ -2,6 +2,7 @@ export interface IState {
   softDrinks: ISoftDrinks[];
   sakes: ISake[];
   appetizers: IAppetizers[];
+  nigiri: INigiri[];
   currentMenu: any[];
 }
 
@@ -24,6 +25,15 @@ export interface IAppetizers {
   price: number;
   image: string;
   description: string;
-  category: "A" | "N" | "S" | "SA";
+  category: "A" | "N" | "S" | "SA" | "AL";
+  vegetarian_options: boolean;
+}
+
+export interface INigiri {
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+  category: "R" | "C" | "AL";
   vegetarian_options: boolean;
 }

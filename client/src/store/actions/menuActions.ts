@@ -1,6 +1,13 @@
+import { MenuItemTypeMap } from "@material-ui/core";
 import { Dispatch } from "react";
 import menuAxios from "../../config/menuAxios";
-import { IAppetizers, ISake, ISoftDrinks, IState } from "../interfaces";
+import {
+  IAppetizers,
+  INigiri,
+  ISake,
+  ISoftDrinks,
+  IState,
+} from "../interfaces";
 
 // TODO: put action interfaces in another file
 
@@ -8,8 +15,8 @@ import { IAppetizers, ISake, ISoftDrinks, IState } from "../interfaces";
 export enum MenuActionTypes {
   // Appetizer Actions
   GET_ALL_APPETIZERS = "appetizers/get-all",
-  SHOW_VEGE_APPETIZERS = "appetizers/vegetarian",
-  SHOW_ALL_APPETIZERS = "appetizers/show-all",
+  FILTER_APPETIZER = "appetizer/filter",
+  SHOW_VEGETARIAN_APPETIZERS = "appetizer/vegetarian",
   // Soft Drinks Actions
   GET_ALL_SOFT_DRINKS = "soft-drinks/get-all",
   SHOW_ALL_SOFT_DRINKS = "soft-drinks/show-all",
@@ -18,8 +25,58 @@ export enum MenuActionTypes {
   // Sake Actions
   GET_ALL_SAKE = "sake/get-all",
   FILTER_SAKE = "sake/filter",
+  // Nigiri Actions
+  GET_ALL_NIGIRI = "nigiri/get-all",
+  FILTER_NIGIRI = "nigiri/filter",
 }
-export type MenuActions = AppetizerActions | SoftDrinkActions | SakeActions;
+export type MenuActions =
+  | AppetizerActions
+  | SoftDrinkActions
+  | SakeActions
+  | NigiriActions;
+
+//-------------------------------------------------------------------------
+// * Nigiri Actions
+type NigiriActions = IGetAllNigiriAciton | IFilterNigiriAction;
+
+interface IGetAllNigiriAciton {
+  type: MenuActionTypes.GET_ALL_NIGIRI;
+  payload: INigiri[];
+}
+
+export const getAllNigiri = async (dispatch: Dispatch<IGetAllNigiriAciton>) => {
+  const res = await menuAxios.get("/menu/nigiri");
+
+  return dispatch({
+    type: MenuActionTypes.GET_ALL_NIGIRI,
+    payload: res.data,
+  });
+};
+
+interface IFilterNigiriAction {
+  type: MenuActionTypes.FILTER_NIGIRI;
+  payload: INigiri[];
+}
+
+export const filterNigiri = async (
+  state: IState,
+  dispatch: Dispatch<IFilterNigiriAction>,
+  filterOption: INigiri["category"]
+) => {
+  if (filterOption === "AL") {
+    return dispatch({
+      type: MenuActionTypes.FILTER_NIGIRI,
+      payload: state.nigiri,
+    });
+  }
+
+  const res = state.nigiri.filter((sushi) => sushi.category === filterOption);
+
+  return dispatch({
+    type: MenuActionTypes.FILTER_NIGIRI,
+    payload: res,
+  });
+};
 
 //-------------------------------------------------------------------------
 // * Sake Actions
@@ -69,8 +126,8 @@ export const filterSake = async (
 
 type AppetizerActions =
   | IGetAllAppetizersAction
-  | IShowVegeAppetizersAction
-  | IShowAllAppetizersAction;
+  | IFilterAppetizerAction
+  | IShowVegetarianAppetizerAction;
 
 // Get all appetizers from api
 interface IGetAllAppetizersAction {
@@ -89,39 +146,48 @@ export const getAppetizers = async (
   });
 };
 
-// Filter out vegetarian options
-interface IShowVegeAppetizersAction {
-  type: MenuActionTypes.SHOW_VEGE_APPETIZERS;
+interface IFilterAppetizerAction {
+  type: MenuActionTypes.FILTER_APPETIZER;
   payload: IAppetizers[];
 }
 
-export const getVegeAppetizers = (
+export const filterAppetizer = async (
   state: IState,
-  dispatch: Dispatch<IShowVegeAppetizersAction>
+  dispatch: Dispatch<IFilterAppetizerAction>,
+  filterOption: IAppetizers["category"]
 ) => {
+  if (filterOption === "AL") {
+    return dispatch({
+      type: MenuActionTypes.FILTER_APPETIZER,
+      payload: state.appetizers,
+    });
+  }
+
   const res = state.appetizers.filter(
-    (item) => item.vegetarian_options === true
+    (appetizer) => appetizer.category === filterOption
   );
 
   return dispatch({
-    type: MenuActionTypes.SHOW_VEGE_APPETIZERS,
+    type: MenuActionTypes.FILTER_APPETIZER,
     payload: res,
   });
 };
 
-// Show all appetizers
-interface IShowAllAppetizersAction {
-  type: MenuActionTypes.SHOW_ALL_APPETIZERS;
+interface IShowVegetarianAppetizerAction {
+  type: MenuActionTypes.SHOW_VEGETARIAN_APPETIZERS;
   payload: IAppetizers[];
 }
 
-export const showAllAppetizers = (
+export const showVegetarianAppetizer = (
   state: IState,
-  dispatch: Dispatch<IShowAllAppetizersAction>
+  dispatch: Dispatch<IShowVegetarianAppetizerAction>
 ) => {
-  const res = state.appetizers;
+  const res = state.appetizers.filter(
+    (appetizer) => appetizer.vegetarian_options === true
+  );
+
   return dispatch({
-    type: MenuActionTypes.SHOW_ALL_APPETIZERS,
+    type: MenuActionTypes.SHOW_VEGETARIAN_APPETIZERS,
     payload: res,
   });
 };

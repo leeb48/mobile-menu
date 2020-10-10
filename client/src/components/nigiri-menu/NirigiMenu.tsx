@@ -2,11 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Store } from "../../store/Store";
 
 // Actions
-import {
-  getAppetizers,
-  filterAppetizer,
-  showVegetarianAppetizer,
-} from "../../store/actions";
+import { getAllNigiri, filterNigiri } from "../../store/actions";
 
 // Material UI Imports
 import {
@@ -23,7 +19,7 @@ import {
 } from "@material-ui/core";
 
 // Import Interfaces
-import { IAppetizers } from "../../store/interfaces";
+import { INigiri } from "../../store/interfaces";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,19 +43,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AppetizerMenu = () => {
+const NigiriMenu = () => {
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
 
   useEffect(() => {
-    getAppetizers(dispatch);
+    getAllNigiri(dispatch);
   }, [dispatch]);
 
   const renderMenu = state.currentMenu.map((item) => (
     <GridListTile key={item.image}>
       <img src={item.image} alt={item.name} />
       <GridListTileBar
-        title={item.name}
+        title={
+          <span>
+            {item.name} / {item.price}
+          </span>
+        }
         subtitle={<span>{item.description}</span>}
         actionIcon={
           <IconButton
@@ -71,13 +71,13 @@ const AppetizerMenu = () => {
     </GridListTile>
   ));
 
-  const handleFilter = (filter: IAppetizers["category"]) => {
-    filterAppetizer(state, dispatch, filter);
+  const handleFilter = (filter: INigiri["category"]) => {
+    filterNigiri(state, dispatch, filter);
   };
 
-  const handleShowVegetarian = () => {
-    showVegetarianAppetizer(state, dispatch);
-  };
+  //   const handleShowVegetarian = () => {
+  //     showVegetarianAppetizer(state, dispatch);
+  //   };
 
   return (
     <Fragment>
@@ -92,36 +92,20 @@ const AppetizerMenu = () => {
             Show All
           </Button>
           <Button
-            onClick={() => handleFilter("SA")}
+            onClick={() => handleFilter("R")}
             className={classes.filterButton}
             variant="outlined"
             color="secondary"
           >
-            Salads
+            Raw
           </Button>
           <Button
-            onClick={handleShowVegetarian}
+            onClick={() => handleFilter("C")}
             className={classes.filterButton}
             variant="outlined"
             color="secondary"
           >
-            Vegetarian
-          </Button>
-          <Button
-            onClick={() => handleFilter("N")}
-            className={classes.filterButton}
-            variant="outlined"
-            color="secondary"
-          >
-            Noodles
-          </Button>
-          <Button
-            onClick={() => handleFilter("S")}
-            className={classes.filterButton}
-            variant="outlined"
-            color="secondary"
-          >
-            Soups
+            Cooked
           </Button>
         </ListSubheader>
       </GridListTile>
@@ -142,4 +126,4 @@ const AppetizerMenu = () => {
   );
 };
 
-export default AppetizerMenu;
+export default NigiriMenu;

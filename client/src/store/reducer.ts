@@ -6,6 +6,7 @@ export const initialState: IState = {
   softDrinks: [],
   sakes: [],
   appetizers: [],
+  nigiri: [],
   currentMenu: [],
 };
 export const reducer = (state = initialState, action: Actions): IState => {
@@ -18,8 +19,21 @@ export const reducer = (state = initialState, action: Actions): IState => {
         currentMenu: action.payload,
       };
 
-    case MenuActionTypes.SHOW_VEGE_APPETIZERS:
-    case MenuActionTypes.SHOW_ALL_APPETIZERS:
+    // * Nigiri
+    case MenuActionTypes.GET_ALL_NIGIRI:
+      return {
+        ...state,
+        nigiri: action.payload,
+        currentMenu: action.payload,
+      };
+    case MenuActionTypes.FILTER_NIGIRI:
+      return {
+        ...state,
+        currentMenu: action.payload,
+      };
+
+    case MenuActionTypes.FILTER_APPETIZER:
+    case MenuActionTypes.SHOW_VEGETARIAN_APPETIZERS:
       return {
         ...state,
         currentMenu: action.payload,

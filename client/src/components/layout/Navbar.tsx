@@ -156,15 +156,25 @@ export default function Navbar() {
   );
 
   const AppetizerMenu = (
-    <Fragment>
-      <IconButton edge="start" color="inherit" aria-label="menu">
-        <TempuraSVG className={classes.svgStyle} />
-      </IconButton>
-    </Fragment>
+    <IconButton
+      component={Link}
+      to="appetizer-menu"
+      edge="start"
+      color="inherit"
+      aria-label="menu"
+    >
+      <TempuraSVG className={classes.svgStyle} />
+    </IconButton>
   );
 
   const SushiMenu = (
-    <IconButton edge="start" color="inherit" aria-label="menu">
+    <IconButton
+      component={Link}
+      to="nigiri-menu"
+      edge="start"
+      color="inherit"
+      aria-label="menu"
+    >
       <NigiriSVG className={classes.svgStyle} />
     </IconButton>
   );
