@@ -157,61 +157,9 @@ export default function Navbar() {
 
   const AppetizerMenu = (
     <Fragment>
-      <IconButton
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        aria-controls="collapsed-menu"
-        aria-haspopup="true"
-        name="appetizerEl"
-        onClick={handleClick}
-      >
-        <AppetizerSVG className={classes.svgStyle} />
+      <IconButton edge="start" color="inherit" aria-label="menu">
+        <TempuraSVG className={classes.svgStyle} />
       </IconButton>
-
-      <Menu
-        id="collapsed-menu"
-        anchorEl={anchorEl.appetizerEl}
-        keepMounted
-        open={Boolean(anchorEl.appetizerEl)}
-        onClose={handleClose}
-        PopoverClasses={{
-          paper: classes.menu,
-        }}
-      >
-        <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="/appetizers">
-            <TempuraSVG className={classes.svgStyle} />
-            <Typography color="secondary" variant="h6">
-              Appetizers
-            </Typography>
-          </IconButton>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="noodles">
-            <NoodleSVG className={classes.svgStyle} />
-            <Typography color="secondary" variant="h6">
-              Noodles
-            </Typography>
-          </IconButton>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="soups">
-            <SoupSVG className={classes.svgStyle} />
-            <Typography color="secondary" variant="h6">
-              Soups
-            </Typography>
-          </IconButton>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="salads">
-            <SaladSVG className={classes.svgStyle} />
-            <Typography color="secondary" variant="h6">
-              Salads
-            </Typography>
-          </IconButton>
-        </MenuItem>
-      </Menu>
     </Fragment>
   );
 
