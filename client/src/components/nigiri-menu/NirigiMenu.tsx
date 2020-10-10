@@ -75,10 +75,6 @@ const NigiriMenu = () => {
     filterNigiri(state, dispatch, filter);
   };
 
-  //   const handleShowVegetarian = () => {
-  //     showVegetarianAppetizer(state, dispatch);
-  //   };
-
   return (
     <Fragment>
       <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
@@ -117,7 +113,7 @@ const NigiriMenu = () => {
         </Hidden>
 
         <Hidden only={["xs", "sm", "md"]}>
-          <GridList cellHeight={400} cols={3} className={classes.gridList}>
+          <GridList cellHeight={400} cols={4} className={classes.gridList}>
             {renderMenu}
           </GridList>
         </Hidden>

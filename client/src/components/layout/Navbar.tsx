@@ -12,11 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Menu, MenuItem } from "@material-ui/core";
 
 // SVG Imports
-import { ReactComponent as AppetizerSVG } from "../../img/appetizer.svg";
 import { ReactComponent as TempuraSVG } from "../../img/tempura.svg";
-import { ReactComponent as NoodleSVG } from "../../img/noodles.svg";
-import { ReactComponent as SoupSVG } from "../../img/soups.svg";
-import { ReactComponent as SaladSVG } from "../../img/salad.svg";
 import { ReactComponent as DrinkSVG } from "../../img/Drinks.svg";
 import { ReactComponent as SodaSVG } from "../../img/soda.svg";
 import { ReactComponent as BeerSVG } from "../../img/beer.svg";
@@ -26,6 +22,7 @@ import { ReactComponent as HomeSVG } from "../../img/home.svg";
 import { ReactComponent as NigiriSVG } from "../../img/nigiri.svg";
 import { ReactComponent as SushiRollSVG } from "../../img/sushi-rolls.svg";
 import { ReactComponent as ExtraSVG } from "../../img/extra.svg";
+import { ReactComponent as Plus } from "../../img/plus.svg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,6 +65,10 @@ const useStyles = makeStyles((theme: Theme) =>
         height: "3rem",
       },
     },
+
+    subSvg: {
+      marginRight: "10px",
+    },
   })
 );
 
@@ -77,10 +78,12 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState<{
     drinkEl: null | HTMLElement;
     appetizerEl: null | HTMLElement;
+    rollEl: null | HTMLElement;
     extraEl: null | HTMLElement;
   }>({
     drinkEl: null,
     appetizerEl: null,
+    rollEl: null,
     extraEl: null,
   });
 
@@ -92,6 +95,7 @@ export default function Navbar() {
       appetizerEl: null,
       drinkEl: null,
       extraEl: null,
+      rollEl: null,
     });
   };
 
@@ -121,7 +125,7 @@ export default function Navbar() {
       >
         <MenuItem onClick={handleClose}>
           <IconButton component={Link} to="soft-drinks">
-            <SodaSVG className={classes.svgStyle} />
+            <SodaSVG className={`${classes.svgStyle} ${classes.subSvg}`} />
             <Typography color="secondary" variant="h6">
               Soft Drinks
             </Typography>
@@ -129,7 +133,7 @@ export default function Navbar() {
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <IconButton component={Link} to="wine-menu">
-            <WineSVG className={classes.svgStyle} />
+            <WineSVG className={`${classes.svgStyle} ${classes.subSvg}`} />
             <Typography color="secondary" variant="h6">
               Wine
             </Typography>
@@ -137,7 +141,7 @@ export default function Navbar() {
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <IconButton component={Link} to="beer-menu">
-            <BeerSVG className={classes.svgStyle} />
+            <BeerSVG className={`${classes.svgStyle} ${classes.subSvg}`} />
             <Typography color="secondary" variant="h6">
               Beer
             </Typography>
@@ -145,7 +149,7 @@ export default function Navbar() {
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <IconButton component={Link} to="sake-menu">
-            <SakeSVG className={classes.svgStyle} />
+            <SakeSVG className={`${classes.svgStyle} ${classes.subSvg}`} />
             <Typography color="secondary" variant="h6">
               Sake
             </Typography>
@@ -180,9 +184,47 @@ export default function Navbar() {
   );
 
   const RollMenu = (
-    <IconButton edge="start" color="inherit" aria-label="menu">
-      <SushiRollSVG className={classes.svgStyle} />
-    </IconButton>
+    <Fragment>
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        aria-controls="roll-menu"
+        aria-haspopup="true"
+        name="rollEl"
+        onClick={handleClick}
+      >
+        <SushiRollSVG className={classes.svgStyle} />
+      </IconButton>
+
+      <Menu
+        id="rollEl"
+        anchorEl={anchorEl.rollEl}
+        keepMounted
+        open={Boolean(anchorEl.rollEl)}
+        onClose={handleClose}
+        PopoverClasses={{
+          paper: classes.menu,
+        }}
+      >
+        <MenuItem onClick={handleClose}>
+          <IconButton component={Link} to="special-rolls-menu">
+            <Plus className={`${classes.svgStyle} ${classes.subSvg}`} />
+            <Typography color="secondary" variant="h6">
+              Special Rolls
+            </Typography>
+          </IconButton>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <IconButton component={Link} to="hand-or-cut-rolls-menu">
+            <Plus className={`${classes.svgStyle} ${classes.subSvg}`} />
+            <Typography color="secondary" variant="h6">
+              Hand Rolls &amp; Cut Rolls
+            </Typography>
+          </IconButton>
+        </MenuItem>
+      </Menu>
+    </Fragment>
   );
 
   const ExtraMenu = (

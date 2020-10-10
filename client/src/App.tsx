@@ -12,6 +12,7 @@ import AppetizerMenu from "./components/appetizer-menu/AppetizerMenu";
 import SoftDrinksMenu from "./components/drinks-menu/SoftDrinksMenu";
 import SakeMenu from "./components/drinks-menu/SakeMenu";
 import NigiriMenu from "./components/nigiri-menu/NirigiMenu";
+import HandOrCutRollsMenu from "./components/roll-menu/HandOrCutRollsMenu";
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
         <Route exact path="/beer-menu" component={BeerMenu} />
         <Route exact path="/sake-menu" component={SakeMenu} />
         <Route exact path="/nigiri-menu" component={NigiriMenu} />
+        <Route
+          exact
+          path="/hand-or-cut-rolls-menu"
+          component={HandOrCutRollsMenu}
+        />
       </Switch>
     </Router>
   );
