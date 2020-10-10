@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from .models import AppetizerItem, SoftDrinkItem, SakeItem, NigiriItem
+from .models import AppetizerItem, SoftDrinkItem, SakeItem, NigiriItem, RollItem
+
+
+class RollSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RollItem
+        fields = ('name', 'price', 'image', 'description',
+                  'category', 'spicy_options', 'vegetarian_options', 'long_image')
 
 
 class AppetizerSerializer(serializers.ModelSerializer):

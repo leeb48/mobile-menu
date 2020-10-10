@@ -48,14 +48,14 @@ class RollItem(models.Model):
         ('F', 'Fresh'),
         ('D', 'Deep Fried'),
         ('B', 'Baked'),
-        ('V', 'Vegetarian')
     )
 
     name = models.CharField(max_length=60)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    long_image = models.BooleanField(default=False)
     image = models.ImageField(upload_to='food_images',
                               default='food_images/default.jpg')
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     category = models.CharField(max_length=1, choices=ROLL_CATEGORIES)
     spicy_options = models.BooleanField(default=False)
     hand_roll_options = models.BooleanField(default=False)

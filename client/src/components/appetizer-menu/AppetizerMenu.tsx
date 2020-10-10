@@ -61,12 +61,6 @@ const AppetizerMenu = () => {
       <GridListTileBar
         title={item.name}
         subtitle={<span>{item.description}</span>}
-        actionIcon={
-          <IconButton
-            aria-label={`info about ${item.name}`}
-            className={classes.icon}
-          ></IconButton>
-        }
       />
     </GridListTile>
   ));
@@ -90,6 +84,15 @@ const AppetizerMenu = () => {
             color="secondary"
           >
             Show All
+          </Button>
+
+          <Button
+            onClick={() => handleFilter("A")}
+            className={classes.filterButton}
+            variant="outlined"
+            color="secondary"
+          >
+            Appetizers
           </Button>
           <Button
             onClick={() => handleFilter("SA")}

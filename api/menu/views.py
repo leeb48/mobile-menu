@@ -3,9 +3,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from .models import AppetizerItem, SoftDrinkItem, SakeItem, NigiriItem
+from .models import(AppetizerItem, SoftDrinkItem,
+                    SakeItem, NigiriItem, RollItem)
 
-from .serializers import AppetizerSerializer, SoftDrinkSerializer, SakeSerializer, NigiriSerializer
+from .serializers import(AppetizerSerializer, SoftDrinkSerializer,
+                         SakeSerializer, NigiriSerializer, RollSerializer)
 
 import os
 import json
@@ -36,6 +38,15 @@ def get_all_sake(request):
     sake_sr = SakeSerializer(sake_qs, many=True)
 
     return Response(sake_sr.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_all_rolls(request):
+    roll_qs = RollItem.objects.all()
+
+    roll_sr = RollSerializer(roll_qs, many=True)
+
+    return Response(roll_sr.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])

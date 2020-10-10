@@ -104,13 +104,13 @@ const SoftDrinksMenu = () => {
         </ListSubheader>
       </GridListTile>
       <div className={classes.root}>
-        <Hidden only={["md", "lg", "xl"]}>
+        <Hidden only={["lg", "xl"]}>
           <GridList cellHeight={200} cols={2} className={classes.gridList}>
             {renderMenu}
           </GridList>
         </Hidden>
 
-        <Hidden only={["xs", "sm"]}>
+        <Hidden only={["xs", "sm", "md"]}>
           <GridList cellHeight={400} cols={3} className={classes.gridList}>
             {renderMenu}
           </GridList>

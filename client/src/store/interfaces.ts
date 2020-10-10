@@ -3,7 +3,20 @@ export interface IState {
   sakes: ISake[];
   appetizers: IAppetizers[];
   nigiri: INigiri[];
+  rolls: IRolls[];
   currentMenu: any[];
+}
+
+export interface IRolls {
+  name: string;
+  image: string;
+  price: number;
+  description: string;
+  category: "F" | "D" | "B" | "AL";
+  spicy_options: boolean;
+  hand_roll_options: boolean;
+  vegetarian_options: boolean;
+  long_image: boolean;
 }
 
 export interface ISake {

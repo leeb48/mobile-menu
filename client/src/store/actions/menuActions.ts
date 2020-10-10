@@ -1,9 +1,9 @@
-import { MenuItemTypeMap } from "@material-ui/core";
 import { Dispatch } from "react";
 import menuAxios from "../../config/menuAxios";
 import {
   IAppetizers,
   INigiri,
+  IRolls,
   ISake,
   ISoftDrinks,
   IState,
@@ -28,12 +28,34 @@ export enum MenuActionTypes {
   // Nigiri Actions
   GET_ALL_NIGIRI = "nigiri/get-all",
   FILTER_NIGIRI = "nigiri/filter",
+  // Roll Actions
+  GET_ALL_ROLLS = "rolls/get-all",
 }
 export type MenuActions =
   | AppetizerActions
   | SoftDrinkActions
   | SakeActions
-  | NigiriActions;
+  | NigiriActions
+  | RollActions;
+
+//-------------------------------------------------------------------------
+// * Roll Actions
+
+type RollActions = IGetAllRollsAction;
+
+interface IGetAllRollsAction {
+  type: MenuActionTypes.GET_ALL_ROLLS;
+  payload: IRolls[];
+}
+
+export const getAllRolls = async (dispatch: Dispatch<IGetAllRollsAction>) => {
+  const res = await menuAxios.get("/menu/rolls");
+
+  return dispatch({
+    type: MenuActionTypes.GET_ALL_ROLLS,
+    payload: res.data,
+  });
+};
 
 //-------------------------------------------------------------------------
 // * Nigiri Actions
