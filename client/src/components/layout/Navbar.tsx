@@ -79,12 +79,10 @@ export default function Navbar() {
     drinkEl: null | HTMLElement;
     appetizerEl: null | HTMLElement;
     rollEl: null | HTMLElement;
-    extraEl: null | HTMLElement;
   }>({
     drinkEl: null,
     appetizerEl: null,
     rollEl: null,
-    extraEl: null,
   });
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) =>
@@ -94,7 +92,6 @@ export default function Navbar() {
     setAnchorEl({
       appetizerEl: null,
       drinkEl: null,
-      extraEl: null,
       rollEl: null,
     });
   };
@@ -209,7 +206,7 @@ export default function Navbar() {
       >
         <MenuItem onClick={handleClose}>
           <IconButton component={Link} to="special-rolls-menu">
-            <Plus className={`${classes.svgStyle} ${classes.subSvg}`} />
+            <Plus className={`${classes.svgStyle2} ${classes.subSvg}`} />
             <Typography color="secondary" variant="h6">
               Special Rolls
             </Typography>
@@ -217,7 +214,7 @@ export default function Navbar() {
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <IconButton component={Link} to="hand-or-cut-rolls-menu">
-            <Plus className={`${classes.svgStyle} ${classes.subSvg}`} />
+            <Plus className={`${classes.svgStyle2} ${classes.subSvg}`} />
             <Typography color="secondary" variant="h6">
               Hand Rolls &amp; Cut Rolls
             </Typography>
@@ -229,43 +226,9 @@ export default function Navbar() {
 
   const ExtraMenu = (
     <Fragment>
-      <IconButton
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        aria-controls="collapsed-menu"
-        aria-haspopup="true"
-        name="extraEl"
-        onClick={handleClick}
-      >
+      <IconButton component={Link} to="extra-menu" edge="start" color="inherit">
         <ExtraSVG className={classes.svgStyle} />
       </IconButton>
-
-      <Menu
-        id="collapsed-menu"
-        anchorEl={anchorEl.extraEl}
-        keepMounted
-        open={Boolean(anchorEl.extraEl)}
-        onClose={handleClose}
-        PopoverClasses={{
-          paper: classes.menu,
-        }}
-      >
-        <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="/appetizers">
-            <Typography color="secondary" variant="h6">
-              Desert
-            </Typography>
-          </IconButton>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <IconButton component={Link} to="noodles">
-            <Typography color="secondary" variant="h6">
-              Extra Items
-            </Typography>
-          </IconButton>
-        </MenuItem>
-      </Menu>
     </Fragment>
   );
 
