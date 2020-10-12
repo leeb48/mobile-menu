@@ -14,6 +14,7 @@ import SakeMenu from "./components/drinks-menu/SakeMenu";
 import NigiriMenu from "./components/nigiri-menu/NirigiMenu";
 import HandOrCutRollsMenu from "./components/roll-menu/HandOrCutRollsMenu";
 import SpecialRollsMenu from "./components/roll-menu/SpecialRollsMenu";
+import ExtraMenu from "./components/extra-menu/ExtraMenu";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           path="/hand-or-cut-rolls-menu"
           component={HandOrCutRollsMenu}
         />
+        <Route exact path="/extra-menu" component={ExtraMenu} />
       </Switch>
     </Router>
   );
