@@ -160,12 +160,16 @@ interface IGetAllAppetizersAction {
 export const getAppetizers = async (
   dispatch: Dispatch<IGetAllAppetizersAction>
 ) => {
-  const res = await menuAxios.get("/menu/appetizers");
+  try {
+    const res = await menuAxios.get("/menu/appetizers");
 
-  return dispatch({
-    type: MenuActionTypes.GET_ALL_APPETIZERS,
-    payload: res.data,
-  });
+    return dispatch({
+      type: MenuActionTypes.GET_ALL_APPETIZERS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 interface IFilterAppetizerAction {
