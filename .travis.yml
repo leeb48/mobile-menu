@@ -5,7 +5,7 @@ services:
   - docker
 
 after_success:
-  - docker build -t bongster228/yama-menu-api ./api --build-arg DEBUG=$DEBUG --build-arg DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+  - docker build -t bongster228/yama-menu-api ./api --build-arg DEBUG=$DEBUG --build-arg AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME --build-arg DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
   - docker build -t bongster228/yama-menu-client ./client
   - docker build -t bongster228/yama-menu-nginx ./nginx
 
