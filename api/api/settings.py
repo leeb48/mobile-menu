@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Internal
     'menu',
+    'authentication',
     # Third-Party
     'rest_framework',
     'storages',
